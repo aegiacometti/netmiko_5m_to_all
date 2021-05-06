@@ -1,4 +1,4 @@
-This is the most basic use of netmiko for beginners.
+This is the most basic HOWTO / use of netmiko for beginners.
 
 Throw commands from 0 to the whole inventory in 5 minutes.
 
