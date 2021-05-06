@@ -1,0 +1,23 @@
+common_vars:
+  username: cisco
+  password: cisco
+  device_type: cisco_ios
+
+hosts:
+  - hostname: site1-access
+    host: 10.100.200.1
+
+  - hostname: site1-core
+    host: 10.100.12.1
+
+  - hostname: isp-pe
+    host: 10.0.12.1
+
+  - hostname: site2-access
+    host: 10.101.23.2
+
+  - hostname: site2-core
+    host: 10.0.13.1
+
+  - hostname: isp-internet
+    host: 10.0.14.1
