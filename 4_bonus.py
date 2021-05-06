@@ -47,11 +47,11 @@ def get_devices(device_filter: str) -> dict:
         inventory['hosts'] = matched_devices
 
     # Show matched inventory and confirm
-    text = 'Matched inventory'
+    text = '\nMatched inventory'
     print('{}\n{}'.format(text, '*' * len(text)))
     for device in inventory['hosts']:
         print('* host: {} - ip: {}'.format(device['hostname'], device['host']))
-    confirm = input('Please confirm (y/n): ')
+    confirm = input('\nPlease confirm (y/n): ')
 
     if confirm.lower() != 'y':
         sys.exit()
@@ -61,7 +61,7 @@ def get_devices(device_filter: str) -> dict:
 
 if __name__ == "__main__":
     # Type device filter by IP or hostname. Partial values or full. Optionally 'all'
-    device_filter = input('Specify device filter: ')
+    device_filter = input('\nSpecify device filter: ')
 
     # Load devices from file with the filter and display matching device
     inventory = get_devices(device_filter)
@@ -72,9 +72,9 @@ if __name__ == "__main__":
     execution_start_timer = time.perf_counter()
     devices_counter = 0
 
-    command = input('Command to run: ')
+    command = input('\nCommand to run: ')
     while command != 'exit':
-        print(f'Executing command: {command}\n')
+        print(f'\nExecuting command: {command}\n')
         # Loop to repeat the command in all the inventory
         for device in inventory['hosts']:
             devices_counter += 1

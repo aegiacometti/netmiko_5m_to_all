@@ -53,8 +53,8 @@ if __name__ == "__main__":
     # get parameters from CLI. Choose the following 2 lines OR the next 2
     # device_filter = sys.argv[1]
     # command = ' '.join(sys.argv[2:])
-    device_filter = input('Specify device filter: ')
-    command = input('Command to run: ')
+    device_filter = input('\nSpecify device filter: ')
+    command = input('\nCommand to run: ')
 
     # Load devices from file with the filter
     inventory = get_devices(device_filter)
@@ -65,7 +65,7 @@ if __name__ == "__main__":
     execution_start_timer = time.perf_counter()
     devices_counter = 0
 
-    print(f'Executing command: {command}\n')
+    print(f'\nExecuting command: {command}\n')
     # Loop to repeat the command in all the inventory
     for device in inventory['hosts']:
         devices_counter += 1

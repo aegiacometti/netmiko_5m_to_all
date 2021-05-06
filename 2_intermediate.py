@@ -33,7 +33,7 @@ def send_command(dev: dict, cmd: str) -> str:
 if __name__ == "__main__":
     # get parameters from CLI
     # command = ' '.join(sys.argv[2:])
-    command = input('Command to run: ')
+    command = input('\nCommand to run: ')
 
     # Load devices from file
     with open('inventory.yml') as f:
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     execution_start_timer = time.perf_counter()
     devices_counter = 0
 
-    print(f'Executing command: {command}\n')
+    print(f'\nExecuting command: {command}\n')
     # Loop to repeat the command in all the inventory
     for device in inventory['hosts']:
         devices_counter += 1
