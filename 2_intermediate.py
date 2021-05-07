@@ -18,18 +18,25 @@ def send_command(dev: dict, cmd: str) -> str:
     :param cmd: command to execute
     :return: Command output from device
     """
+    hostname = device['hostname']
+    # remove key hostname from dictionary since it is not expected/valid for netmiko
+    del dev['hostname']
+
     try:
-        # remove key hostname from dictionary since it is not expected/valid for netmiko
-        del dev['hostname']
         # Use context manager to open and close the SSH session
         with ConnectHandler(**dev) as ssh:
             ssh.enable()
             output = ssh.send_command(cmd)
-        return output.strip()
+        output = output.strip()
     except NetmikoTimeoutException:
-        return 'Connection timed out'
+        output = 'Connection timed out'
     except NetmikoAuthenticationException:
-        return 'Authentication failed'
+        output = 'Authentication failed'
+
+    # re add key for future use
+    dev['hostname'] = hostname
+
+    return output
 
 
 if __name__ == "__main__":
@@ -51,10 +58,9 @@ if __name__ == "__main__":
     # Loop to repeat the command in all the inventory
     for device in inventory['hosts']:
         devices_counter += 1
-        hostname = device['hostname']
         # update the device dictionary with the credentials and send command
         device.update(credentials)
-        print('*** host: {} - ip: {}'.format(hostname, device['host']))
+        print('*** host: {} - ip: {}'.format(device['hostname'], device['host']))
         # send command and store results
         result = send_command(device, command)
         # show result
