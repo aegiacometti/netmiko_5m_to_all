@@ -26,9 +26,11 @@ def send_command(dev: dict, cmd: str) -> str:
         with ConnectHandler(**dev) as ssh:
             ssh.enable()
             output = ssh.send_command(cmd)
-        return output
-    except (NetmikoTimeoutException, NetmikoAuthenticationException) as error:
-        return error
+        return output.strip()
+    except NetmikoTimeoutException:
+        return 'Connection timed out'
+    except NetmikoAuthenticationException:
+        return 'Authentication failed'
 
 
 def get_devices(device_filter: str) -> dict:
