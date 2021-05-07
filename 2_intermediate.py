@@ -1,4 +1,4 @@
-# This example show how to execute a command in all the inventory
+# This example show how to execute a command in ALL the inventory
 # The list of devices and credentials is specified in an external yaml file,
 # imported and looped.
 # It will also print how long it took to execute the command

@@ -1,8 +1,9 @@
-# This example show how to execute a command in several devices devices
-# The list of devices and credentials is specified in an external yaml file
-# Then with a filter we select which one are we interesting in.
-# The filter is by partial or full name or IP, or 'all'
+# This example show how to execute a command in several devices devices.
+# The list of devices and credentials is specified in an external yaml file.
+# Then with an input string filter we select which one are we interesting in.
+# This filter can be by partial or full, name or IP, or 'all'
 # It will also print how long it took to execute the command
+# Finally it will stay in a loop with the selected devices to throw multiple commands
 
 # Change import settings
 import yaml
@@ -72,8 +73,11 @@ if __name__ == "__main__":
     execution_start_timer = time.perf_counter()
     devices_counter = 0
 
+    # get command to execute from CLI
     command = input('\nCommand to run: ')
-    while command != 'exit':
+    
+    # loop to keep throwing commands to the same selected inventory
+    while command.lower() != 'exit':
         print(f'\nExecuting command: {command}\n')
         # Loop to repeat the command in all the inventory
         for device in inventory['hosts']:
