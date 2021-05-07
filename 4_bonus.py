@@ -20,8 +20,8 @@ def send_command(dev: dict, cmd: str) -> str:
     :param cmd: command to execute
     :return: Command output from device
     """
+    hostname = dev['hostname']
     try:
-        hostname = dev['hostname']
         # remove key hostname from dictionary since it is not expected/valid for netmiko
         del dev['hostname']
         # Use context manager to open and close the SSH session
@@ -29,11 +29,14 @@ def send_command(dev: dict, cmd: str) -> str:
             ssh.enable()
             output = ssh.send_command(cmd)
         dev['hostname'] = hostname
-        return output.strip()
+        output = output.strip()
     except NetmikoTimeoutException:
-        return 'Connection timed out'
+        output = 'Connection timed out'
     except NetmikoAuthenticationException:
-        return 'Authentication failed'
+        output =  'Authentication failed'
+    # re add key for future use
+    dev['hostname'] = hostname
+    return output
 
 
 def get_devices(device_filter: str) -> dict:
