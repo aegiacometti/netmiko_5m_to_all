@@ -50,11 +50,14 @@ if __name__ == "__main__":
 
     # get the common variables for all devices
     credentials = inventory['common_vars']
-    # Start timer variable
-    execution_start_timer = time.perf_counter()
+
     devices_counter = 0
 
     print(f'\nExecuting command: {command}\n')
+
+    # Start timer variable
+    execution_start_timer = time.perf_counter()
+
     # Loop to repeat the command in all the inventory
     for device in inventory['hosts']:
         devices_counter += 1
