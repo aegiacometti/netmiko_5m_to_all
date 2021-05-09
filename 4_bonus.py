@@ -79,7 +79,7 @@ if __name__ == "__main__":
 
     # get the common variables for all devices
     credentials = inventory['common_vars']
-    devices_counter = 0
+    devices_counter = len(inventory['hosts'])
 
     # get command to execute from CLI
     command = input('\nCommand to run: ')
@@ -91,7 +91,6 @@ if __name__ == "__main__":
         execution_start_timer = time.perf_counter()
         # Loop to repeat the command in all the inventory
         for device in inventory['hosts']:
-            devices_counter += 1
             # update the device dictionary with the credentials and send command
             device.update(credentials)
             print('*** host: {} - ip: {}'.format(device['hostname'], device['host']))
